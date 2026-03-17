@@ -1,4 +1,9 @@
 # 🚀 SonarQube Installation Guide
+## Amazon Linux 2023 (Kernel 6.1) on AWS EC2
+
+**Author:** Atul Kamble
+**Role:** Cloud Solutions Architect | DevOps Trainer
+
 
 ```
 // Configuration of sonarqube on EC2 
@@ -15,10 +20,6 @@ admin/admin
 >> Admin@123
 ```
 
-## Amazon Linux 2023 (Kernel 6.1) on AWS EC2
-
-**Author:** Atul Kamble
-**Role:** Cloud Solutions Architect | DevOps Trainer
 
 ---
 
