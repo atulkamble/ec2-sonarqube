@@ -23,13 +23,14 @@ admin/admin
 ## Sonar Scanner on Amazon Linux 2023
 # sonar scanner installation & configuration 
 ```
-cd /opt && \
-sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip && \
-sudo unzip sonar-scanner-cli-5.0.1.3006-linux.zip && \
-sudo mv sonar-scanner-5.0.1.3006-linux sonar-scanner && \
-echo 'export PATH=$PATH:/opt/sonar-scanner/bin' | sudo tee /etc/profile.d/sonar-scanner.sh && \
-source /etc/profile.d/sonar-scanner.sh && \
+cd /opt
+sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+sudo unzip sonar-scanner-cli-5.0.1.3006-linux.zip
+sudo mv sonar-scanner-5.0.1.3006-linux sonar-scanner
+echo 'export PATH=$PATH:/opt/sonar-scanner/bin' | sudo tee /etc/profile.d/sonar-scanner.sh 
+source /etc/profile.d/sonar-scanner.sh
 sonar-scanner -h
+sonar-scanner -v
 ```
 ---
 
