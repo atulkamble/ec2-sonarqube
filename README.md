@@ -20,7 +20,17 @@ admin/admin
 >> Admin@123
 ```
 
-
+## Sonar Scanner on Amazon Linux 2023
+# sonar scanner installation & configuration 
+```
+cd /opt && \
+sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip && \
+sudo unzip sonar-scanner-cli-5.0.1.3006-linux.zip && \
+sudo mv sonar-scanner-5.0.1.3006-linux sonar-scanner && \
+echo 'export PATH=$PATH:/opt/sonar-scanner/bin' | sudo tee /etc/profile.d/sonar-scanner.sh && \
+source /etc/profile.d/sonar-scanner.sh && \
+sonar-scanner -h
+```
 ---
 
 # 🖥️ Server Configuration
@@ -502,209 +512,41 @@ systemctl status postgresql
 
 ---
 
-Here is a **clean, professional documentation section** you can add to your **SonarQube EC2 Installation Guide**.
 
----
-
-# 🔎 Install Sonar Scanner CLI (Linux)
-
-**SonarScanner** is the official tool used to **analyze source code and send results to the SonarQube server**.
-
-It is typically used in:
-
-* CI/CD pipelines (Jenkins, GitHub Actions, Azure DevOps)
-* Local developer machines
-* Automated build servers
-
----
-
-# 📦 Step 1 — Download SonarScanner
-
-Navigate to the `/opt` directory (recommended for tools installation).
-
-```bash
-cd /opt
+# sonar scanner installation & configuration | manual 
 ```
-
-Download the SonarScanner CLI package.
-
-```bash
 sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-```
-
-⚠️ Always verify the **latest version** from:
-
-[https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/](https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/)
-
----
-
-# 📦 Step 2 — Extract Package
-
-```bash
 sudo unzip sonar-scanner-cli-5.0.1.3006-linux.zip
-```
-
-After extraction you will see:
-
-```
-sonar-scanner-5.0.1.3006-linux
-```
-
-Rename it for simplicity.
-
-```bash
 sudo mv sonar-scanner-5.0.1.3006-linux sonar-scanner
-```
-
-Final installation path:
-
-```
-/opt/sonar-scanner
-```
-
----
-
-# ⚙️ Step 3 — Configure Sonar Scanner
-
-Open configuration file.
-
-```bash
 sudo nano /opt/sonar-scanner/conf/sonar-scanner.properties
 ```
-
-Add or update the following values:
-
-```properties
+update
+```
 sonar.host.url=http://localhost:9000
 sonar.sourceEncoding=UTF-8
 ```
-
-### Explanation
-
-| Property             | Description                   |
-| -------------------- | ----------------------------- |
-| sonar.host.url       | URL of SonarQube server       |
-| sonar.sourceEncoding | Encoding used for source code |
-
-If SonarQube is hosted on another server, replace `localhost`.
-
-Example:
-
+if remote 
 ```
-sonar.host.url=http://54.152.122.131:9000
+sonar.host.url=http://<your-server-ip>:9000
 ```
-
----
-
-# ⚙️ Step 4 — Configure Global PATH
-
-Create environment file.
-
-```bash
+Set Environment Variables
+```
 sudo nano /etc/profile.d/sonar-scanner.sh
 ```
-
-Add the following:
-
-```bash
+add
+```
 #!/bin/bash
-export PATH="$PATH:/opt/sonar-scanner/bin"
+export PATH=$PATH:/opt/sonar-scanner/bin
 ```
-
-Save and exit.
-
----
-
-# 🔐 Step 5 — Set Execution Permission
-
-Ensure SonarScanner binary is executable.
-
-```bash
-sudo chmod +x /opt/sonar-scanner/bin/sonar-scanner
+give permission 
 ```
-
----
-
-# 🔄 Step 6 — Reload Environment Variables
-
-Load the new PATH configuration.
-
-```bash
+sudo chmod +x /etc/profile.d/sonar-scanner.sh
+```
+load env 
+```
 source /etc/profile.d/sonar-scanner.sh
 ```
-
----
-
-# ✅ Step 7 — Verify Installation
-
-Run:
-
-```bash
+verify installation 
+```
 sonar-scanner -h
 ```
-
-check version 
-```
-sonar-scanner -v
-```
-
-Expected output:
-
-```
-INFO: usage: sonar-scanner [options]
-```
-
-This confirms **SonarScanner is successfully installed**.
-
----
-
-# 📂 Directory Structure
-
-```
-/opt
- ├── sonarqube
- └── sonar-scanner
-      ├── bin
-      ├── conf
-      ├── jre
-      └── lib
-```
-
----
-
-# 🚀 Example: Run Sonar Scanner
-
-Inside a project directory:
-
-```bash
-sonar-scanner \
--Dsonar.projectKey=myproject \
--Dsonar.sources=. \
--Dsonar.host.url=http://localhost:9000 \
--Dsonar.login=YOUR_TOKEN
-```
-
----
-
-# 🧠 Points to Remember
-
-✔ SonarScanner **does not require root user**
-✔ Used in **CI/CD pipelines**
-✔ Requires **Java (already included in scanner)**
-✔ Requires **SonarQube server running**
-
----
-
-# 🧩 DevOps Pipeline Integration
-
-Common integrations:
-
-| Tool           | Usage              |
-| -------------- | ------------------ |
-| Jenkins        | Code quality stage |
-| GitHub Actions | PR scanning        |
-| Azure DevOps   | Pipeline task      |
-| GitLab CI      | Quality gate check |
-
----
-
