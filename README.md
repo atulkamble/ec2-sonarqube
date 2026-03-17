@@ -643,6 +643,11 @@ Run:
 sonar-scanner -h
 ```
 
+check version 
+```
+sonar-scanner -v
+```
+
 Expected output:
 
 ```
