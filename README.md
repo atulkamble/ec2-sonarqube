@@ -1,5 +1,20 @@
 # 🚀 SonarQube Installation Guide
 
+```
+// Configuration of sonarqube on EC2 
+
+1. Launch ec2 connect via ssh 
+amazon linux | t3.large | SSD - 60GB 
+NSG - Inbound - 9000 
+2. ssh to server 
+3. installation and configuration 
+https://github.com/atulkamble/ec2-sonarqube
+4. public-ip:9000 
+5. username/password 
+admin/admin 
+>> Admin@123
+```
+
 ## Amazon Linux 2023 (Kernel 6.1) on AWS EC2
 
 **Author:** Atul Kamble
