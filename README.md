@@ -345,6 +345,12 @@ sudo systemctl status sonarqube
 
 SonarQube requires **password authentication (md5)**.
 
+Remove existing file
+```
+sudo rm /var/lib/pgsql/data/pg_hba.conf
+```
+& Updated Code accordingly
+
 Edit PostgreSQL config:
 
 ```bash
