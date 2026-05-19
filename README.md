@@ -92,6 +92,11 @@ sudo dnf install wget unzip git -y
 
 # 3️⃣ Install Java 17 (Required by SonarQube)
 
+## check existing java package and remove the same if required 
+```
+rpm -qa | grep -i java
+```
+
 ```bash
 sudo dnf install java-17-amazon-corretto -y
 ```
