@@ -24,9 +24,9 @@ admin/admin
 # sonar scanner installation & configuration 
 ```
 cd /opt
-sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-sudo unzip sonar-scanner-cli-5.0.1.3006-linux.zip
-sudo mv sonar-scanner-5.0.1.3006-linux sonar-scanner
+sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-8.1.0.6389.zip
+sudo unzip sonar-scanner-cli-8.1.0.6389.zip
+sudo mv sonar-scanner-8.1.0.6389/ sonar-scanner
 echo 'export PATH=$PATH:/opt/sonar-scanner/bin' | sudo tee /etc/profile.d/sonar-scanner.sh 
 source /etc/profile.d/sonar-scanner.sh
 sonar-scanner -h
@@ -96,9 +96,13 @@ sudo dnf install wget unzip git -y
 ```
 rpm -qa | grep -i java
 ```
+## switch current java to 21 if required
+```
+sudo alternatives --config java
+```
 
 ```bash
-sudo dnf install java-17-amazon-corretto -y
+sudo dnf install java-21-amazon-corretto.x86_64 -y
 ```
 
 Verify Java:
@@ -116,7 +120,7 @@ readlink -f $(which java)
 Example output:
 
 ```
-/usr/lib/jvm/java-17-amazon-corretto.x86_64/bin/java
+/usr/lib/jvm/java-21-amazon-corretto.x86_64/bin/java
 ```
 
 ---
@@ -126,7 +130,7 @@ Example output:
 Install PostgreSQL server:
 
 ```bash
-sudo dnf install postgresql15 postgresql15-server -y
+sudo dnf install postgresql17.x86_64 postgresql17-server.x86_64 -y
 ```
 
 Initialize database:
@@ -196,19 +200,19 @@ cd /opt
 Download SonarQube LTS:
 
 ```bash
-sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.4.87374.zip
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-26.5.0.122743.zip
 ```
 
 Extract package:
 
 ```bash
-sudo unzip sonarqube-9.9.4.87374.zip
+sudo unzip sonarqube-26.5.0.122743.zip
 ```
 
 Rename directory:
 
 ```bash
-sudo mv sonarqube-9.9.4.87374 sonarqube
+sudo mv sonarqube-26.5.0.122743 sonarqube
 ```
 
 ---
@@ -308,8 +312,8 @@ Group=sonar
 LimitNOFILE=65536
 LimitNPROC=4096
 
-Environment="JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64"
-Environment="PATH=/usr/lib/jvm/java-17-amazon-corretto.x86_64/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto.x86_64"
+Environment="PATH=/usr/lib/jvm/java-21-amazon-corretto.x86_64/bin:/usr/local/bin:/usr/bin:/bin"
 
 ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
 ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
@@ -424,6 +428,12 @@ sudo systemctl restart sonarqube
 ```
 
 ---
+# 🌐 Manual Run 
+
+```
+cd /opt/sonarqube/bin/linux-x86-64
+./sonar.sh console
+```
 
 # 🌐 Access SonarQube
 
@@ -443,6 +453,14 @@ http://54.152.122.131:9000/
 | Password | admin |
 
 You will be prompted to **change password after first login**.
+
+# 🔑 Change Password
+
+| Field    | Value |
+| -------- | ----- |
+| Username | admin |
+| Password | Admin@123456 | 
+
 
 ---
 
