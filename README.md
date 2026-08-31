@@ -1,4 +1,4 @@
-# 🚀 SonarQube Installation Guide
+# 🚀 SonarQube Installation & Configurations Guide
 ## Amazon Linux 2023 (Kernel 6.1) on AWS EC2
 
 **Author:** Atul Kamble
